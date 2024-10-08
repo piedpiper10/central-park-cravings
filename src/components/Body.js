@@ -1,10 +1,30 @@
-import { Rest_Data } from "../Utils/mockData";
 import RestaurantCard from "./RestaurantCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { SWIGGY_RESTAURENT_LIST_URL } from "../Utils/constants";
 
 const Body = () => {
   //local state variable - super powerful variable
-  const [listOfRestaurants, setListofRestraunts] = useState(Rest_Data);
+  const [listOfRestaurants, setListofRestraunts] = useState([]);
+
+  useEffect(() => {
+    console.log("UseEffect Called");
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const data = await fetch(SWIGGY_RESTAURENT_LIST_URL);
+      const res = await data.json();
+      setListofRestraunts(
+        res?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
+    } catch (err) {
+      console.log("check for the error", err);
+    }
+  };
+
+  console.log("body rendered");
   return (
     <div className="body">
       {/* <div className="search">Search</div> */}
