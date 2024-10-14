@@ -1,7 +1,7 @@
 import { CDN_URL } from "../Utils/constants";
+import { Link } from "react-router-dom";
 
 const RestaurantCard = (props) => {
-  console.log("check for the props", props);
   const { restData } = props;
   const {
     name,
@@ -10,7 +10,9 @@ const RestaurantCard = (props) => {
     costForTwo,
     sla: { deliveryTime },
     cloudinaryImageId,
+    id,
   } = restData?.info;
+
   return (
     <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
       <img

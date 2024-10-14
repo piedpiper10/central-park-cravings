@@ -27,12 +27,16 @@
 .res-container {
   display: flex;
   flex-wrap: wrap;
+  align-items: stretch;
+  gap: 20px;
 }
 
 .res-card {
   margin: 5px;
   width: 200px;
   padding: 10px;
+  flex: 1;
+  height: 500px;
 }
 
 .res-card:hover {
@@ -52,4 +56,70 @@
 .filter-btn {
   margin: 10px;
   cursor: pointer;
+}
+
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shimmer-card {
+  width: 200px;
+  height: 400px;
+  background-color: #f0f0f0;
+  margin: 20px;
+}
+
+.login {
+  padding: 0px 20px;
+  cursor: pointer;
+}
+
+.filter {
+  display: flex;
+}
+
+.menu-border {
+  border-top: 16px solid rgba(2, 6, 12, 0.05);
+  padding-top: 10px;
+  font-family: Gilroy;
+  border-bottom: 16px solid rgba(2, 6, 12, 0.05);
+}
+
+.restaurent {
+  margin: 20px auto 0;
+  max-width: 800px;
+  min-height: 800px;
+}
+
+.restaurent > ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.restaurent > ul > li {
+  padding-bottom: 5px;
+}
+
+.rest-menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.border {
+  border-bottom: 0.5px solid #d3d3d3;
+}
+
+.img {
+  width: 156px;
+  padding-bottom: 5px;
+}
+
+.font-styles {
+  font-family: Gilroy_Bold;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: -0.3px;
+  color: rgba(2, 6, 12, 0.75);
 }
