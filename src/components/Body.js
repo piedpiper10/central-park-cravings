@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { SWIGGY_RESTAURENT_LIST_URL } from "../Utils/constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlieStatus from "../Utils/useOnlineStatus";
 
 const Body = () => {
   //local state variable - super powerful variable
@@ -28,6 +29,13 @@ const Body = () => {
       console.log("check for the error", err);
     }
   };
+
+  const onlineStatus = useOnlieStatus();
+  if (onlineStatus === false) {
+    return (
+      <h1> looks like your offline!! please check your internet connection </h1>
+    );
+  }
 
   //Conditional Rendering
   if (listOfRestaurants.length === 0) {

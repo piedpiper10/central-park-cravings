@@ -80,7 +80,7 @@
 }
 
 .menu-border {
-  border-top: 16px solid rgba(2, 6, 12, 0.05);
+  /* border-top: 16px solid rgba(2, 6, 12, 0.05); */
   padding-top: 10px;
   font-family: Gilroy;
   border-bottom: 16px solid rgba(2, 6, 12, 0.05);
