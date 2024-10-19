@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Head from "./components/Header";
 import Body from "./components/Body";
@@ -8,6 +8,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurentMenuCategories from "./components/RestaurentMenuCategories";
+
 /**
  * Header
  *  - Logo
@@ -26,6 +27,14 @@ import RestaurentMenuCategories from "./components/RestaurentMenuCategories";
  **/
 
 //not using keys (not acceptable) <<< index as key <<<< uniaue id(best practice)
+
+//chunking
+// code splitting
+//dynamic bundling
+//LAZY Loading on demand loading
+//dynamic import
+
+const Grocery = lazy(() => import("./components/Grocery"));
 
 const AppLayout = () => {
   return (
@@ -56,6 +65,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurents/:resId", //dynamic path resId is dynamic here
         element: <RestaurentMenuCategories />,
+      },
+      {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<h1>Loadding...</h1>}>
+            <Grocery />
+          </Suspense>
+        ),
       },
     ],
     errorElement: <Error />,
