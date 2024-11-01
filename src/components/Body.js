@@ -1,9 +1,10 @@
-import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
+import { useState, useEffect, useContext } from "react";
 import { SWIGGY_RESTAURENT_LIST_URL } from "../Utils/constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlieStatus from "../Utils/useOnlineStatus";
+import UserContext from "../Utils/userContext";
 
 const Body = () => {
   //local state variable - super powerful variable
@@ -11,6 +12,10 @@ const Body = () => {
   const [fileterdRestaurants, setFileterdRestaurants] = useState([]);
 
   const [searchText, setSearchText] = useState(" ");
+
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   useEffect(() => {
     fetchData();
@@ -37,12 +42,14 @@ const Body = () => {
     );
   }
 
+  console.log("check logged in user", loggedInUser);
+
   //Conditional Rendering
   if (listOfRestaurants.length === 0) {
     return <Shimmer />;
   }
 
-  return listOfRestaurants?.length == 0 ? (
+  return listOfRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
@@ -86,6 +93,17 @@ const Body = () => {
             Top Rated Restaurant
           </button>
         </div>
+        <div className="m-4 p-4 flex items-center">
+          <label className="pr-4">UserName:</label>
+          <input
+            className="border border-black"
+            value={loggedInUser}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setUserName(e.target.value);
+            }}
+          />
+        </div>
       </div>
       <div className="flex flex-wrap">
         {fileterdRestaurants.map((restaurant) => (
@@ -93,7 +111,11 @@ const Body = () => {
             to={`/restaurents/${restaurant.info.id}`}
             key={restaurant.info.id}
           >
-            <RestaurantCard restData={restaurant} />
+            {!restaurant?.data?.promoted ? (
+              <RestaurantCardPromoted restData={restaurant} />
+            ) : (
+              <RestaurantCard restData={restaurant} />
+            )}
           </Link>
         ))}
       </div>

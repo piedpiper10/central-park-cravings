@@ -1,10 +1,14 @@
+import { useContext } from "react";
 import { CDN_URL } from "../Utils/constants";
 import { Link } from "react-router-dom";
+import UserContext from "../Utils/userContext";
 
 const RestaurantCard = (props) => {
   const { restData } = props;
+  console.log(restData);
+  const { loggedInUser } = useContext(UserContext);
   const {
-    name,
+    name = "sample",
     cuisines,
     avgRating,
     costForTwo,
@@ -25,8 +29,24 @@ const RestaurantCard = (props) => {
       <h4>{avgRating}</h4>
       <h4>{deliveryTime}</h4>
       <h4>{costForTwo}</h4>
+      <h4>User: {loggedInUser}</h4>
     </div>
   );
 };
 
+//Higher order Component
+
+//input - RestaurantCard => RestaurantCardPromoted
+export const withPromotedLabel = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label className="absolute bg-black text-white m-2 p-2 rounded-lg">
+          promoted
+        </label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
 export default RestaurantCard;

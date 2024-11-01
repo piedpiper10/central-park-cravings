@@ -31,13 +31,7 @@ const useRestaurantMenu = (resId) => {
             },
           },
           ,
-          {
-            groupedCard: {
-              cardGroupMap: {
-                REGULAR: { cards },
-              },
-            },
-          },
+          { groupedCard: { cardGroupMap: { REGULAR: { cards } } = {} } } = {},
         ],
       },
     } = ({} = json);
